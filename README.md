@@ -46,13 +46,13 @@ npm run preview
 
 Signal currently uses **deterministic English-language phrase rules** (`rules-1.0`), not an LLM or trained prediction model.
 
-| Category | Example of a signal |
-| --- | --- |
-| Buying intent | Explicit purchase actions, such as “where can I buy” |
+| Category      | Example of a signal                                         |
+| ------------- | ----------------------------------------------------------- |
+| Buying intent | Explicit purchase actions, such as “where can I buy”        |
 | Consideration | Questions about price, size, shipping, fit, or availability |
-| Negative | Supported negations or clear negative purchase language |
-| Ambiguous | Uncertain or conditional interest; conflicting signals |
-| Other | No supported phrase match |
+| Negative      | Supported negations or clear negative purchase language     |
+| Ambiguous     | Uncertain or conditional interest; conflicting signals      |
+| Other         | No supported phrase match                                   |
 
 Negated purchase language is handled before positive matching. Conditional or humorous purchase language may be labeled **Ambiguous**. Reviewers can adjust any category with a reason; the original automatic classification is retained in exports.
 
@@ -71,17 +71,17 @@ A missing denominator is shown as undefined, **not 0%**. Imported comments are n
 
 Each CSV row represents a comment. Repeat the post information on each row; for posts with no imported comments, leave both comment fields empty.
 
-| Column | Description |
-| --- | --- |
-| `post_id` | Non-empty post ID; repeated rows must use consistent post details |
-| `creator` | Creator name |
-| `post_title` | Post title |
-| `views` | Non-negative whole number |
-| `likes` | Non-negative whole number, no greater than views |
-| `reported_comments` | Non-negative whole number, no smaller than the imported comment count |
-| `comment_id` | Globally unique ID, or blank when comment text is blank |
-| `comment_text` | Comment text, up to 10,000 characters; required when comment ID is supplied |
-| `dataset_type` | Optional: `synthetic` or `user-supplied` (defaults to `user-supplied`) |
+| Column              | Description                                                                 |
+| ------------------- | --------------------------------------------------------------------------- |
+| `post_id`           | Non-empty post ID; repeated rows must use consistent post details           |
+| `creator`           | Creator name                                                                |
+| `post_title`        | Post title                                                                  |
+| `views`             | Non-negative whole number                                                   |
+| `likes`             | Non-negative whole number, no greater than views                            |
+| `reported_comments` | Non-negative whole number, no smaller than the imported comment count       |
+| `comment_id`        | Globally unique ID, or blank when comment text is blank                     |
+| `comment_text`      | Comment text, up to 10,000 characters; required when comment ID is supplied |
+| `dataset_type`      | Optional: `synthetic` or `user-supplied` (defaults to `user-supplied`)      |
 
 CSV files may be up to **5 MB and 10,000 data rows**. UTF-8, quoted fields and newlines, and UTF-8 BOMs are supported. Imports are validated before replacing the current dataset, and a successful import clears previous reviews.
 
@@ -125,3 +125,7 @@ The app builds as a static Vite site; no backend or secrets are needed.
 ## Project status
 
 Signal is an independent Product Engineering prototype built to explore how creator-campaign teams might examine intent-related evidence. Its example data is fictional, and no campaign performance or classifier-accuracy claims are made.
+
+## Vercel Web Analytics
+
+`@vercel/analytics/react` is mounted once in the React entry point, with the mode set explicitly from Vite’s development/production environment. Enable **Web Analytics** for the project in the Vercel dashboard and deploy the updated build to collect page views. Development mode does not collect analytics. No custom events or imported data are sent to Analytics. See the [Vercel setup guide](https://vercel.com/docs/analytics/quickstart).
